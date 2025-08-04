@@ -24,40 +24,53 @@ export default function Header() {
   const [user, setUser] = useState<User | null>(null);
   const [cartCount, setCartCount] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isAuthLoading, setIsAuthLoading] = useState(true);
   const { theme, setTheme } = useTheme();
   const navigate = useNavigate();
   const { toast } = useToast();
 
   useEffect(() => {
-    // التحقق من حالة المصادقة
-    const checkAuth = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (user) {
-        setUser({
-          id: user.id,
-          email: user.email!,
-          full_name: user.user_metadata?.full_name
-        });
-        fetchCartCount(user.id);
-      }
-    };
-
-    checkAuth();
-
-    // الاستماع لتغييرات المصادقة
+    // الاستماع لتغييرات المصادقة أولاً
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      setIsAuthLoading(false);
       if (session?.user) {
-        setUser({
+        const userData = {
           id: session.user.id,
           email: session.user.email!,
           full_name: session.user.user_metadata?.full_name
-        });
-        fetchCartCount(session.user.id);
+        };
+        setUser(userData);
+        // تأجيل جلب عدد السلة لتجنب التعارض
+        setTimeout(() => {
+          fetchCartCount(session.user.id);
+        }, 0);
       } else {
         setUser(null);
         setCartCount(0);
       }
     });
+
+    // التحقق من الجلسة الحالية
+    const initializeAuth = async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        setIsAuthLoading(false);
+        if (session?.user) {
+          const userData = {
+            id: session.user.id,
+            email: session.user.email!,
+            full_name: session.user.user_metadata?.full_name
+          };
+          setUser(userData);
+          fetchCartCount(session.user.id);
+        }
+      } catch (error) {
+        console.error('خطأ في تهيئة المصادقة:', error);
+        setIsAuthLoading(false);
+      }
+    };
+
+    initializeAuth();
 
     return () => subscription.unsubscribe();
   }, []);
@@ -139,7 +152,7 @@ export default function Header() {
             className="text-xl md:text-2xl font-bold text-gradient cursor-pointer"
             onClick={() => navigate('/')}
           >
-            المتجر الأصيل
+            المتجر العربي الأصيل
           </h1>
         </div>
         
@@ -192,7 +205,9 @@ export default function Header() {
             )}
           </Button>
           
-          {user ? (
+          {isAuthLoading ? (
+            <div className="w-8 h-8 animate-pulse bg-muted rounded" />
+          ) : user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="sm">
