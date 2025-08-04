@@ -1,0 +1,144 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* نظام التصميم للمتجر العربي - جميع الألوان والتدرجات والخطوط */
+
+@layer base {
+  :root {
+    /* الألوان الأساسية - مستوحاة من التراث العربي */
+    --background: 45 15% 97%;
+    --foreground: 25 10% 15%;
+    --card: 45 20% 98%;
+    --card-foreground: 25 10% 15%;
+    --popover: 45 20% 98%;
+    --popover-foreground: 25 10% 15%;
+    --primary: 30 80% 45%;
+    --primary-foreground: 45 15% 97%;
+    --secondary: 25 25% 90%;
+    --secondary-foreground: 25 10% 15%;
+    --muted: 35 20% 94%;
+    --muted-foreground: 25 8% 50%;
+    --accent: 35 60% 88%;
+    --accent-foreground: 25 10% 15%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 45 15% 97%;
+    --border: 35 25% 88%;
+    --input: 35 25% 88%;
+    --ring: 30 80% 45%;
+
+    /* تدرجات ذهبية ونحاسية عربية */
+    --gradient-primary: linear-gradient(135deg, hsl(35 70% 50%), hsl(25 80% 45%));
+    --gradient-secondary: linear-gradient(135deg, hsl(45 60% 85%), hsl(35 50% 80%));
+    --gradient-hero: linear-gradient(135deg, hsl(30 80% 45%), hsl(25 70% 40%), hsl(20 60% 35%));
+    --gradient-card: linear-gradient(180deg, hsl(45 25% 96%), hsl(40 20% 94%));
+    
+    /* ظلال أنيقة */
+    --shadow-elegant: 0 10px 30px -10px hsl(30 50% 45% / 0.2);
+    --shadow-glow: 0 0 40px hsl(35 70% 50% / 0.15);
+    --shadow-card: 0 4px 20px -4px hsl(25 30% 30% / 0.1);
+    
+    /* انتقالات سلسة */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 45 20% 96%;
+    --sidebar-foreground: 25 10% 20%;
+    --sidebar-primary: 30 80% 45%;
+    --sidebar-primary-foreground: 45 15% 97%;
+    --sidebar-accent: 35 30% 92%;
+    --sidebar-accent-foreground: 25 10% 20%;
+    --sidebar-border: 35 25% 88%;
+    --sidebar-ring: 30 80% 45%;
+  }
+
+  .dark {
+    /* الوضع المظلم - ألوان عربية داكنة */
+    --background: 25 15% 8%;
+    --foreground: 45 15% 95%;
+    --card: 25 15% 10%;
+    --card-foreground: 45 15% 95%;
+    --popover: 25 15% 10%;
+    --popover-foreground: 45 15% 95%;
+    --primary: 35 70% 55%;
+    --primary-foreground: 25 15% 8%;
+    --secondary: 25 10% 18%;
+    --secondary-foreground: 45 15% 95%;
+    --muted: 25 8% 15%;
+    --muted-foreground: 35 8% 65%;
+    --accent: 30 20% 20%;
+    --accent-foreground: 45 15% 95%;
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 45 15% 95%;
+    --border: 25 10% 18%;
+    --input: 25 10% 18%;
+    --ring: 35 70% 55%;
+    
+    /* تدرجات عربية داكنة */
+    --gradient-primary: linear-gradient(135deg, hsl(35 70% 55%), hsl(30 60% 50%));
+    --gradient-secondary: linear-gradient(135deg, hsl(25 15% 20%), hsl(30 10% 15%));
+    --gradient-hero: linear-gradient(135deg, hsl(35 70% 55%), hsl(30 60% 45%), hsl(25 50% 35%));
+    --gradient-card: linear-gradient(180deg, hsl(25 15% 12%), hsl(25 10% 10%));
+    
+    /* ظلال داكنة */
+    --shadow-elegant: 0 10px 30px -10px hsl(0 0% 0% / 0.4);
+    --shadow-glow: 0 0 40px hsl(35 70% 55% / 0.2);
+    --shadow-card: 0 4px 20px -4px hsl(0 0% 0% / 0.3);
+
+    --sidebar-background: 25 15% 12%;
+    --sidebar-foreground: 45 15% 90%;
+    --sidebar-primary: 35 70% 55%;
+    --sidebar-primary-foreground: 25 15% 8%;
+    --sidebar-accent: 25 10% 20%;
+    --sidebar-accent-foreground: 45 15% 90%;
+    --sidebar-border: 25 10% 18%;
+    --sidebar-ring: 35 70% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-arabic;
+    font-family: 'Tajawal', 'Cairo', system-ui, -apple-system, sans-serif;
+  }
+  
+  html {
+    direction: rtl;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-gradient-to-r from-primary to-primary/90 text-primary-foreground;
+    @apply hover:shadow-[var(--shadow-glow)] transition-[var(--transition-smooth)];
+    @apply active:scale-95 transform;
+  }
+  
+  .card-elegant {
+    @apply bg-gradient-to-b from-card to-card/95;
+    @apply shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-elegant)];
+    @apply transition-[var(--transition-smooth)] hover:-translate-y-1;
+  }
+  
+  .glass-effect {
+    @apply bg-white/10 backdrop-blur-md border border-white/20;
+  }
+  
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary via-primary/80 to-primary/60;
+    @apply bg-clip-text text-transparent;
+  }
+  
+  .btn-arabic {
+    @apply px-8 py-3 rounded-xl font-semibold transition-[var(--transition-bounce)];
+    @apply hover:scale-105 active:scale-95;
+  }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&family=Cairo:wght@200;300;400;500;600;700;800;900&display=swap');
