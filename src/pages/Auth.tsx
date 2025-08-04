@@ -136,7 +136,7 @@ export default function Auth() {
               <LogIn className="h-8 w-8 text-primary-foreground" />
             </div>
             <CardTitle className="text-2xl font-bold text-gradient">
-              المتجر العربي الأصيل
+              المتجر الأصيل
             </CardTitle>
           </CardHeader>
           <CardContent>
