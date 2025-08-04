@@ -253,7 +253,7 @@ export default function Home() {
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gradient">المتجر العربي الأصيل</h3>
+              <h3 className="text-lg font-semibold text-gradient">المتجر الأصيل</h3>
               <p className="text-muted-foreground">
                 متجرك الموثوق للحرف والفنون العربية الأصيلة
               </p>
