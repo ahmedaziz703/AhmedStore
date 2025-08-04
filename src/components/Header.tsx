@@ -98,7 +98,7 @@ export default function Header() {
       
       toast({
         title: "تم تسجيل الخروج بنجاح",
-        description: "نراك قريباً!",
+        description: "نراك قريباً",
       });
       navigate('/');
     } catch (error) {
@@ -152,7 +152,7 @@ export default function Header() {
             className="text-xl md:text-2xl font-bold text-gradient cursor-pointer"
             onClick={() => navigate('/')}
           >
-            المتجر العربي الأصيل
+            المتجر الأصيل
           </h1>
         </div>
         
