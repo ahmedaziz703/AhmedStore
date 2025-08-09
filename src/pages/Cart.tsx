@@ -40,7 +40,7 @@ export default function Cart() {
       const { data: { user } } = await supabase.auth.getUser();
       
       if (!user) {
-        navigate('/auth');
+        navigate('/auth', { replace: true });
         return;
       }
 
@@ -48,7 +48,7 @@ export default function Cart() {
       await fetchCartItems(user.id);
     } catch (error) {
       console.error('خطأ في التحقق من المصادقة:', error);
-      navigate('/auth');
+      navigate('/auth', { replace: true });
     }
   };
 
