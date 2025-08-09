@@ -43,7 +43,7 @@ export default function Favorites() {
       const { data: { user } } = await supabase.auth.getUser();
       
       if (!user) {
-        navigate('/auth');
+        navigate('/auth', { replace: true });
         return;
       }
 
@@ -51,7 +51,7 @@ export default function Favorites() {
       await fetchFavorites();
     } catch (error) {
       console.error('خطأ في التحقق من المستخدم:', error);
-      navigate('/auth');
+      navigate('/auth', { replace: true });
     } finally {
       setLoading(false);
     }
@@ -125,7 +125,7 @@ export default function Favorites() {
 
   const addToCart = async (productId: string, productName: string) => {
     if (!user) {
-      navigate('/auth');
+      navigate('/auth', { replace: true });
       return;
     }
 
